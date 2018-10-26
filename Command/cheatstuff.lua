@@ -1,3 +1,4 @@
+require('Sysluna')
 local function OnPlayerCommand(event, player, command)
     local gmRank = player:GetGMRank()
     if (gmRank > 0 and command == "cheatstuff")then
@@ -12,4 +13,4 @@ local function OnPlayerCommand(event, player, command)
     end
 end
 
-RegisterPlayerEvent(42, OnPlayerCommand)
+RegisterPlayerEvent(PlayerEvent.Command, OnPlayerCommand)
