@@ -1,5 +1,5 @@
 local function OnPlayerCommand(event, player, command)
-    gmRank = player:GetGMRank()
+    local gmRank = player:GetGMRank()
     if (gmRank > 0 and command == "cheatstuff")then
         player:AddItem(43651)
         player:AddItem(12064)
