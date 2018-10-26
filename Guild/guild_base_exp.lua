@@ -21,9 +21,9 @@ local function OnGuildMemberKillCreature (event, player, creature)
       if(MapId == GetFunction.PlayerMap)then
         Q0 = CharDBQuery("SELECT final_exp, level, current_exp FROM `eluna`.`guild_base` WHERE guild_id = "..GetFunction.PlayerGuildId.."")
         if(Q0 ~= nil)then
-          final_exp = Q0:GetUInt32(0)
-          level = Q0:GetUInt32(1)
-          current_exp = Q0:GetUInt32(2)
+          local final_exp = Q0:GetUInt32(0)
+          local level = Q0:GetUInt32(1)
+          local current_exp = Q0:GetUInt32(2)
           if(Calcul.HighLevel <= 5 or Calcul.LowLevel >= -5 and level ~= 24)then
             CharDBQuery("UPDATE `eluna`.`guild_members_stats` SET totalexp = totalexp + "..Calcul.ClassicExp.." WHERE member_id = "..GetFunction.PlayerGUID.."")
             CharDBQuery("UPDATE `eluna`.`guild_base` SET current_exp = current_exp + "..Calcul.ClassicExp.." WHERE guild_id = "..GetFunction.PlayerGuildId.."")
@@ -41,9 +41,9 @@ local function OnGuildMemberKillCreature (event, player, creature)
       if(MapId == GetFunction.PlayerMap)then
         Q0 = CharDBQuery("SELECT final_exp, level, current_exp FROM `eluna`.`guild_base` WHERE guild_id = "..GetFunction.PlayerGuildId.."")
         if(Q0 ~= nil)then
-          final_exp = Q0:GetUInt32(0)
-          level = Q0:GetUInt32(1)
-          current_exp = Q0:GetUInt32(2)
+          local final_exp = Q0:GetUInt32(0)
+          local level = Q0:GetUInt32(1)
+          local current_exp = Q0:GetUInt32(2)
           if(Calcul.HighLevel <= 5 or Calcul.LowLevel >= -5 and level ~= 24)then
             CharDBQuery("UPDATE `eluna`.`guild_members_stats` SET totalexp = totalexp + "..Calcul.BcExp.." WHERE member_id = "..GetFunction.PlayerGUID.."")
             CharDBQuery("UPDATE `eluna`.`guild_base` SET current_exp = current_exp + "..Calcul.BcExp.." WHERE guild_id = "..GetFunction.PlayerGuildId.."")
@@ -61,9 +61,9 @@ local function OnGuildMemberKillCreature (event, player, creature)
       if(MapId == GetFunction.PlayerMap)then
         Q0 = CharDBQuery("SELECT final_exp, level, current_exp FROM `eluna`.`guild_base` WHERE guild_id = "..GetFunction.PlayerGuildId.."")
         if(Q0 ~= nil)then
-          final_exp = Q0:GetUInt32(0)
-          level = Q0:GetUInt32(1)
-          current_exp = Q0:GetUInt32(2)
+          local final_exp = Q0:GetUInt32(0)
+          local level = Q0:GetUInt32(1)
+          local current_exp = Q0:GetUInt32(2)
           if(Calcul.HighLevel <= 5 or Calcul.LowLevel >= -5 and level ~= 24)then
             CharDBQuery("UPDATE `eluna`.`guild_members_stats` SET totalexp = totalexp + "..Calcul.BcExp.." WHERE member_id = "..GetFunction.PlayerGUID.."")
             CharDBQuery("UPDATE `eluna`.`guild_base` SET current_exp = current_exp + "..Calcul.BcExp.." WHERE guild_id = "..GetFunction.PlayerGuildId.."")
