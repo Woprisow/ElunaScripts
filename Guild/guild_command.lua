@@ -1,7 +1,6 @@
 require('sysluna')
 
 --[[TEMPORARY SCRIPT]]--
-
 local function OnPlayerCommand(event, player, command)
   if (command == "guild_members_stats")then
     if(player:GetGuildId() ~= nil)then

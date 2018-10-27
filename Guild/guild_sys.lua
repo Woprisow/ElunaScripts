@@ -2,6 +2,7 @@ require('sysluna')
 
 local function OnGuildCreate (event, guild, player)
   local Q0 = CharDBQuery("INSERT INTO `eluna`.`guild_base` VALUES ("..guild:GetId()..", "..player:GetGUIDLow()..", 1, 0, 0, 16570000)")
+  local Q1 = CharDBQuery("")
 end
 RegisterGuildEvent(GuildEvent.Create, OnGuildCreate)
 
