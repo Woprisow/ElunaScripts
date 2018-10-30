@@ -1,0 +1,1 @@
+CREATE TABLE `characters_info` ( `GUID` INT NOT NULL, `exp` INT DEFAULT 1, PRIMARY KEY (`GUID`) );

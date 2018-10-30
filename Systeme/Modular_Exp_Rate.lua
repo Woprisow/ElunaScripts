@@ -1,10 +1,14 @@
 require('Sysluna')
 
+--[[ GO Systeme/SQL_BASE AND EXECUTE MODULAR_EXP_RATE.SQL ON YOU ELUNA DB]]
+
 local NPC = 197
 local MenuId = 123
 
+local ElunaDB = 'Eluna'
+
 local function OnGossipHello(event, player, object)
-  local Q0 = CharDBQuery("SELECT exp FROM `ra_eluna`.`characters_info` WHERE GUID = "..player:GetGUIDLow().."")
+  local Q0 = CharDBQuery("SELECT exp FROM `"..ElunaDB.."`.`characters_info` WHERE GUID = "..player:GetGUIDLow().."")
   if(Q0 ~= nil)then
     local EXP = Q0:GetUInt32(0)
   end
@@ -19,11 +23,11 @@ RegisterCreatureGossipEvent(NPC, CreatureGossipEvent.GossipHello, OnGossipHello)
 
 local function OnGossipSelect(event, player, object, sender, intid, code, menuid)
   if(intid == 1)then
-    local Q0 = CharDBQuery("UPDATE `ra_eluna`.`characters_info` SET exp = 1 WHERE GUID = "..player:GetGUIDLow().."")
+    local Q0 = CharDBQuery("UPDATE `"..ElunaDB.."`.`characters_info` SET exp = 1 WHERE GUID = "..player:GetGUIDLow().."")
   elseif(intid == 2)then
-    local Q1 = CharDBQuery("UPDATE `ra_eluna`.`characters_info` SET exp = 2 WHERE GUID = "..player:GetGUIDLow().."")
+    local Q1 = CharDBQuery("UPDATE `"..ElunaDB.."`.`characters_info` SET exp = 2 WHERE GUID = "..player:GetGUIDLow().."")
   elseif(intid == 3)then
-    local Q2 = CharDBQuery("UPDATE `ra_eluna`.`characters_info` SET exp = 3 WHERE GUID = "..player:GetGUIDLow().."")
+    local Q2 = CharDBQuery("UPDATE `"..ElunaDB.."`.`characters_info` SET exp = 3 WHERE GUID = "..player:GetGUIDLow().."")
   end
 end
 RegisterCreatureGossipEvent(NPC, CreatureGossipEvent.GossipSelect, OnGossipSelect)
@@ -46,7 +50,7 @@ local function PlayerKillCreature(event, player, creature)
 
   for MapId,MapName in pairs(ClassicMapID) do
     if(MapId == GetFunction.PlayerMap)then
-      local Q0 = CharDBQuery("SELECT exp FROM `ra_eluna`.`characters_info` WHERE GUID = "..player:GetGUIDLow().."")
+      local Q0 = CharDBQuery("SELECT exp FROM `"..ElunaDB.."`.`characters_info` WHERE GUID = "..player:GetGUIDLow().."")
       if(Q0 ~= nil)then
         local EXP = Q0:GetUInt32(0)
         if(Calcul.HighLevel <= 5 or Calcul.LowLevel >= -5)then
@@ -62,7 +66,7 @@ local function PlayerKillCreature(event, player, creature)
   --
   for MapId,MapName in pairs(BCMapID) do
     if(MapId == GetFunction.PlayerMap)then
-      local Q0 = CharDBQuery("SELECT exp FROM `ra_eluna`.`characters_info` WHERE GUID = "..player:GetGUIDLow().."")
+      local Q0 = CharDBQuery("SELECT exp FROM `"..ElunaDB.."`.`characters_info` WHERE GUID = "..player:GetGUIDLow().."")
       if(Q0 ~= nil)then
         local EXP = Q0:GetUInt32(0)
         if(Calcul.HighLevel <= 5 or Calcul.LowLevel >= -5)then
@@ -78,7 +82,7 @@ local function PlayerKillCreature(event, player, creature)
   --
   for MapId,MapName in pairs(TLKMapID) do
     if(MapId == GetFunction.PlayerMap)then
-      local Q0 = CharDBQuery("SELECT exp FROM `ra_eluna`.`characters_info` WHERE GUID = "..player:GetGUIDLow().."")
+      local Q0 = CharDBQuery("SELECT exp FROM `"..ElunaDB.."`.`characters_info` WHERE GUID = "..player:GetGUIDLow().."")
       if(Q0 ~= nil)then
         local EXP = Q0:GetUInt32(0)
         if(Calcul.HighLevel <= 5 or Calcul.LowLevel >= -5)then
@@ -95,6 +99,6 @@ end
 RegisterPlayerEvent(PlayerEvent.KillCreature, PlayerKillCreature)
 
 local function OnPlayerCreateCharacter(event, player)
-  local Q0 = CharDBQuery("INSERT INTO `ra_eluna`.`characters_info` (GUID) VALUES ("..player:GetGUIDLow()..")")
+  local Q0 = CharDBQuery("INSERT INTO `"..ElunaDB.."`.`characters_info` (GUID) VALUES ("..player:GetGUIDLow()..")")
 end
 RegisterPlayerEvent(PlayerEvent.CharacterCreate, OnPlayerCreateCharacter)
