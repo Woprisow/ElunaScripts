@@ -1,6 +1,7 @@
 require('Sysluna')
 
 local NPC = 197
+local MenuId = 123
 
 local function OnGossipHello(event, player, object)
   local Q0 = CharDBQuery("SELECT exp FROM `ra_eluna`.`characters_info` WHERE GUID = "..player:GetGUIDLow().."")
@@ -9,16 +10,9 @@ local function OnGossipHello(event, player, object)
   end
     --
     player:GossipClearMenu()
-    if(EXP == 1)then
-      player:GossipMenuAddItem(0, "Augmenter ma rate à 2"1, 2)
-      player:GossipMenuAddItem(0, "Augmenter ma rate à 3"1, 3)
-    elseif(EXP == 2)then
-      player:GossipMenuAddItem(0, "Augmenter ma rate à 1"1, 1)
-      player:GossipMenuAddItem(0, "Augmenter ma rate à 3"1, 3)
-    elseif(EXP == 3)then
-      player:GossipMenuAddItem(0, "Augmenter ma rate à 1"1, 1)
-      player:GossipMenuAddItem(0, "Augmenter ma rate à 2"1, 2)
-    end
+      player:GossipMenuAddItem(0, "Augmenter ma rate à 1", 1, 1)
+      player:GossipMenuAddItem(0, "Augmenter ma rate à 2", 1, 2)
+      player:GossipMenuAddItem(0, "Augmenter ma rate à 3", 1, 3)
     player:GossipSendMenu(0x7FFFFFFF, object, MenuId)
 end
 RegisterCreatureGossipEvent(NPC, CreatureGossipEvent.GossipHello, OnGossipHello)
@@ -56,7 +50,11 @@ local function PlayerKillCreature(event, player, creature)
       if(Q0 ~= nil)then
         local EXP = Q0:GetUInt32(0)
         if(Calcul.HighLevel <= 5 or Calcul.LowLevel >= -5)then
-          player:GiveXP(Calcul.ClassicExp)
+          if(EXP == 2)then
+            player:GiveXP(Calcul.ClassicExp*1)
+          elseif(EXP == 3)then
+            player:GiveXP(Calcul.ClassicExp*2)
+          end
         end
       end
     end
@@ -68,7 +66,11 @@ local function PlayerKillCreature(event, player, creature)
       if(Q0 ~= nil)then
         local EXP = Q0:GetUInt32(0)
         if(Calcul.HighLevel <= 5 or Calcul.LowLevel >= -5)then
-          player:GiveXP(Calcul.BcExp)
+          if(EXP == 2)then
+            player:GiveXP(Calcul.BcExp*1)
+          elseif(EXP == 3)then
+            player:GiveXP(Calcul.BcExp*2)
+          end
         end
       end
     end
@@ -80,7 +82,11 @@ local function PlayerKillCreature(event, player, creature)
       if(Q0 ~= nil)then
         local EXP = Q0:GetUInt32(0)
         if(Calcul.HighLevel <= 5 or Calcul.LowLevel >= -5)then
-          player:GiveXP(Calcul.NorthendExp)
+          if(EXP == 2)then
+            player:GiveXP(Calcul.NorthendExp*1)
+          elseif(EXP == 3)then
+            player:GiveXP(Calcul.NorthendExp*2)
+          end
         end
       end
     end
@@ -89,6 +95,6 @@ end
 RegisterPlayerEvent(PlayerEvent.KillCreature, PlayerKillCreature)
 
 local function OnPlayerCreateCharacter(event, player)
-  local CharDBQuery("INSERT INTO `ra_eluna`.`characters_info` (GUID) VALUES ("..player:GetGUIDLow()..")")
+  local Q0 = CharDBQuery("INSERT INTO `ra_eluna`.`characters_info` (GUID) VALUES ("..player:GetGUIDLow()..")")
 end
 RegisterPlayerEvent(PlayerEvent.CharacterCreate, OnPlayerCreateCharacter)
