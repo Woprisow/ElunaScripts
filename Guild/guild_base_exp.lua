@@ -12,7 +12,7 @@ local function OnGuildMemberKillCreature (event, player, creature)
     Calcul = {}
       Calcul.HighLevel = (GetFunction.PlayerLevel - GetFunction.CreatureLevel)
       Calcul.LowLevel = (GetFunction.CreatureLevel - GetFunction.PlayerLevel)
-
+      --
       Calcul.ClassicExp = ((GetFunction.PlayerLevel * 5) + 45)
       Calcul.BcExp = ((GetFunction.PlayerLevel * 5) + 235)
       Calcul.NorthendExp = ((GetFunction.PlayerLevel * 5) + 580)
